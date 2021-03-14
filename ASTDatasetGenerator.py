@@ -54,6 +54,8 @@ while len(next_nodes) > 0:
             node_names[node_counter.index(curr)] += f': {curr.id}'
     elif isinstance(curr, AST_EXPRESSIONS):
         x.append([2, AST_NODES.index(type(curr))])
+        if isinstance(curr, ast.Call):
+            node_names[node_counter.index(curr)] += f': {curr.func.id if isinstance(curr.func, ast.Name) else curr.func.value.id}'
     elif isinstance(curr, AST_SUBSCRIPT):
         x.append([3, AST_NODES.index(type(curr))])
     elif isinstance(curr, AST_COMPREHENSION):
@@ -62,6 +64,8 @@ while len(next_nodes) > 0:
         x.append([5, AST_NODES.index(type(curr))])
     elif isinstance(curr, AST_IMPORTS):
         x.append([6, AST_NODES.index(type(curr))])
+        if isinstance(curr, ast.alias):
+            node_names[node_counter.index(curr)] += f': {curr.name} as {curr.asname}'
     elif isinstance(curr, AST_CONTROL_FLOW):
         x.append([7, AST_NODES.index(type(curr))])
     elif isinstance(curr, AST_FUNCTIONS_CLASSES):
