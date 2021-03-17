@@ -1,7 +1,10 @@
+import argparse
 import ast
 import astpretty
+import cProfile
 import pydot
 import torch
+import yappi
 
 import matplotlib.pyplot as plt
 import networkx as nx
@@ -31,9 +34,13 @@ class FuncLister(ast.NodeVisitor):
 def clean_class(s):
     return s.replace('_ast.', '').replace('class', '').replace("'", '').replace("< ", '').replace(">", '')
 
-with open('code/Fibonacci.py', 'r') as f:
-    tree = ast.parse(f.read())
+parser = argparse.ArgumentParser(description='AST Dataset Generator')
+parser.add_argument('-f', '--file', dest='filename', default='code/Addition.py', type=str, help='Filename to parse')
+args = parser.parse_args()
 
+with open(args.filename, 'r') as f:
+    tree = ast.parse(f.read())
+    
 # astpretty.pprint(tree.body[0], indent='  ', show_offsets=False)
 
 edge_index = []
@@ -95,4 +102,4 @@ png_graph = nx.drawing.nx_pydot.to_pydot(graph)
 for i, n in enumerate(node_counter):
     png_graph.get_node(str(i))[0].set_label(node_names[i] + f'\n {i}: {str(x[i])}')
 # png_graph.get_node('0')[0].set_label(type(node_counter[0]))
-png_graph.write_png('out.png')
+png_graph.write_png('img/' + args.filename.split('/')[-1].replace('.py', '') + '_AST.png')
