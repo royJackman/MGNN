@@ -4,7 +4,7 @@ import astpretty
 import cProfile
 import pydot
 import torch
-import yappi
+# import yappi
 
 import matplotlib.pyplot as plt
 import networkx as nx
@@ -46,16 +46,21 @@ with open(args.filename, 'r') as f:
 edge_index = []
 x = []
 
+LITERALS = 0
+VARIABLES = 0
+
 next_nodes = [tree]
 node_counter = [tree]
 node_names = ['Module']
 while len(next_nodes) > 0:
     curr = next_nodes.pop(0)
     if isinstance(curr, AST_LITERALS):
+        LITERALS += 1
         x.append([0, AST_NODES.index(type(curr))])
         if isinstance(curr, ast.Constant):
             node_names[node_counter.index(curr)] += f': {curr.value}'
     elif isinstance(curr, AST_VARIABLES):
+        VARIABLES += 1
         x.append([1, AST_NODES.index(type(curr))])
         if isinstance(curr, ast.Name):
             node_names[node_counter.index(curr)] += f': {curr.id}'
