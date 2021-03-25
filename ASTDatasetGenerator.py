@@ -2,9 +2,7 @@ import argparse
 import ast
 import astpretty
 import cProfile
-import pydot
 import torch
-# import yappi
 
 import matplotlib.pyplot as plt
 import networkx as nx
