@@ -7,4 +7,4 @@ def qsort(lst):
         more = [x for x in lst[1:] if x >= pivot]
         return qsort(less) + [pivot] + qsort(more)
 
-print(qsort([4, 65, 2, -31, 0, 99, 83, 782, 1]))
+qsort([4, 65, 2, -31, 0, 99, 83, 782, 1])

@@ -1,4 +1,4 @@
-def quickSort(arr):
+def qsort(arr):
     less = []
     pivotList = []
     more = []
@@ -13,8 +13,8 @@ def quickSort(arr):
                 more.append(i)
             else:
                 pivotList.append(i)
-        less = quickSort(less)
-        more = quickSort(more)
+        less = qsort(less)
+        more = qsort(more)
         return less + pivotList + more
 
-print(quickSort([4, 65, 2, -31, 0, 99, 83, 782, 1]))
+qsort([4, 65, 2, -31, 0, 99, 83, 782, 1])
