@@ -8,10 +8,4 @@ ys = ["alpha", "beta", "gamma", "delta", "epsilon", "zeta",
  
 az = sorted(xs)
  
-print (
-    all(map(eq, xs, ys)),
- 
-    all(map(lt, xs, xs[1:])),
- 
-    all(map(lt, az, az[1:]))
-)
+print (all(map(eq, xs, ys)), all(map(lt, xs, xs[1:])), all(map(lt, az, az[1:])))
